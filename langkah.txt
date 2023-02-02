@@ -43,7 +43,28 @@
 2	Pada routing langsung get dengan => Route::get('/', [NewsController::class, 'index']);
 3	pada controller index =>return kan ke Inertia:render('Homepage',[dengan title, dan dexcription])
 
-==== fetching daa ====
+==== fetching data ====
 1 	buat $news = News::all();
 2	didalam [] pada Inertia render muat news dengan 'news'=> $news,
 3	kembali pada homepage resources sesuaikan dengan tampilan
+!!PENTING!!
+1	php artisan migrate:fresh --seeder //untuk drop all data pada seeder
+2	php artisan db:seed //untuk migrate data sb
+
+
+===== Install Daisy UI =====
+1	npm i daisyui
+2	pada tailwind.config.js tambahkan , require('daisyui')
+3 	ambil navar pada dasiy ui
+4 	buat file Navbar pada component
+5	import Navbar pada Homepage.jsx =>import Navbar form @/Component/Navbar;
+6	cari card pada daisy ui dan buat data news menjadi card 
+7 	buat component baru pada Component dengan nama List
+8	panggil <List /> dan berikan props news => <list news={props.news} />
+9 	sesuaikan pada List
+
+==== Membuat model resource ======
+1	php artisan make:resource NewsCollection
+2	pada NewsCollection dalam return buat 'data' => $this->collection (agar bisa menggunakan pagination)
+3 	ubah pada controller yang $news menjadi =? $news = new NewsCollection(News::paginate(9))
+
