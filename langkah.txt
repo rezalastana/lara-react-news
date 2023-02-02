@@ -1,0 +1,49 @@
+1. Install laravel => laravel new <nama_folder>
+2. Sesuaikan DB username - password
+++. masuk dalam folder
+3. composer require laravel/breeze --dev
+4. php artisan breeze:install react -> untuk instal breeze react
+5. npm install -> node module
+
+!!PENTING!!
+//selalu jalankan
+6. npm run dev -> untuk menjalankan Js
+7. php artisan serve -> untuk menjalankan laravel
+
+
+8. Buat Database pada localhost/phpmyadmin
+
+============ Routes and Js ============
+1	Inertia mengarah kepada resource->js->pages ((karena sudah menggunakan inertia, sekarang menggunakan js))
+2	buat Homepage.jsx dengan isian <h1>Hello world</h1>
+3	setting pada routes->Web dengan membuat Route::get baru
+4	langkah detail ada di homepage.jsx 
+
+
+============ Migrate database ============
+1	php artisan migrate
+2	php artisan make:model News -mcr (mcr => model controller route) (News => huruf table harus besar)
+3	pada table ::create buat $table->string title, description, category, author
+4 	setelah itu migrate lagi
+5 	untuk data palsu (dummy) bisa menggunakan seeder
+6	php artisan make:seeder NewsSeeder
+7	Masuk kedalam seeder
+8 	dalam paragrpah(2, true) //berarti paragraph tersebut memiliki 2 paragraph
+9	php artisan db:seed --class=NewsSeeder ->menjalankan db:seeder
+10	php artisan migrate -> migrate & check db
+11 	agar banyak data gunakan model factory
+
+============ DB faker with Factory ============
+1	php artisan make:factory NewsFactory --model=News //buat factory
+2	pada newsSeeder kita panggil -> News::factory()->count(20)->create();
+3	php artisan sb:seed //untuk store data ke database phpMyadmin
+
+============ Mengambil data dari DB ============
+1	Pada controller tambahkan Inertia => use Inertia\Inertia
+2	Pada routing langsung get dengan => Route::get('/', [NewsController::class, 'index']);
+3	pada controller index =>return kan ke Inertia:render('Homepage',[dengan title, dan dexcription])
+
+==== fetching daa ====
+1 	buat $news = News::all();
+2	didalam [] pada Inertia render muat news dengan 'news'=> $news,
+3	kembali pada homepage resources sesuaikan dengan tampilan
